@@ -299,3 +299,134 @@ function App() {
 ```
 
 </details>
+
+<details>
+<summary>📅 2024.01.30</summary>
+
+<h1>Tailwind 적용하기</h1>
+
+- App.jsx
+```jsx
+function Layout() {
+  return (
+    <div className="flex flex-col h-screen justify-between">
+      <Navbar />
+      <main className="mb-auto w-10/12 max-w-4xl mx-auto">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+```
+
+- 부모 `div` 에서 `flex` 로 설정하여 자식 요소들이 `flex` 아이템이 되게 설정한다.
+- `flex-col` : flex 방향을 세로로 설정한다. 자식 요소(`Navbar`, `main`, `Footer`) 역시 세로로 쌓이게 된다.
+- `h-screen` : flex 컨테이너의 높이를 화면 높이의 100%로 설정한다. flex 컨테이너가 화면 전체 높이를 차지한다.
+- `justyfy-between` : 주 축을 따라 콘텐츠를 정렬한다. (이 경우에는 세로) , `Navbar` 를 화면 상단, `Footer` 를 화면 하단에 위치시켜 그 사이에 공간을 만든다.
+
+- `md-auto` : `main` 요소의 하단 마진을 자동으로 설정한다. 이로써 `Navbar` 와 `Footer` 사이에서 가능한한 많은 공간을 차지하며 `Footer` 를 화면 하단으로 밀어낸다.
+- `w-10/12` : `main` 요소의 너비를 부모 컨테이너의 약 83%로 너비를 차지한다.
+- `max-w-4xl` : `main` 요소의 최대 너비 (`max-w`) 를 사전 정의된 값으로 설정
+- `max-auto` : 좌우 마진을 자동으로 설정한다.
+
+
+<h1>React-icons</h1>
+
+https://react-icons.github.io/react-icons/
+
+`npm install react-icons`
+
+- Footer/index.jsx
+```jsx
+import React from "react";
+import { AiOutlineSmile } from "react-icons/ai";
+const Footer = () => {
+  return (
+    <div className="flex h-20 text-lg items-center justify-center bg-gray-800 text-white">
+      All rights reserved. <AiOutlineSmile />
+    </div>
+  );
+};
+export default Footer;
+```
+
+<h1>Redux 사용하기</h1>
+
+`npm install @reduxjs/toolkit react-redux`
+
+- store/userSlice.js
+```javascript
+const initialState = {
+    userData: {
+        id: '',
+        email: '',
+        name: '',
+        role: 0,
+        image: '',
+    },
+    isAuth: false,
+    isLoading: false,
+    error: ''
+};
+```
+
+- `initalState` 는 슬라이스 초기 상태를 정의한다.
+- 사용자 데이터, 인증 상태, 로딩 여부, 오류 메시지를 포함한다.
+
+```javascript
+const userSlice = createSlice({
+    name: 'user',         // 슬라이스의 이름
+    initialState,         // 초기 상태
+    reducers: {},         // 리듀서 액션 생성자 함수들이 정의되는 곳
+    extraReducers: (builder) => {}  // 비동기 액션에 대한 추가 리듀서
+});
+
+export default userSlice.reducer;
+```
+- `createSlice` 함수는 슬라이스 객체를 생성한다.
+  - `reducers` : 리듀서 함수를 정의할 수 있다. 리듀서는 액션이 발생했을 경우 상태를 어떻게 변경할지를 정의한다.
+  - `extraReducers` : Redux Toolkit에서 비동기 액션에 대한 추가적인 리듀서를 정의할 수 있는 부분이다.
+
+- 이 슬라이스는 Redux 스토어에 통합되고, 액션 및 리듀서 함수를 추가하여 상태를 업데이트하고 관리할 수 있다.
+
+
+<h2>Redux store 생성하기</h2>
+- store/index.js
+  
+```javascript
+import { configureStore } from "@reduxjs/toolkit";
+import userReducer from "./userSlice";
+
+export const store = configureStore({
+    reducer: {
+        user: userReducer
+    }
+})
+```
+
+- Redux 스토어는 `configureStore` 함수를 사용하여 생성한다.
+- `reducer` 속성에는 애플리케이션에 사용할 리듀서들을 등록한다.
+  - 여기서는 `userReducer` 를 `user` 슬라이스에 등록
+
+
+<h2>Provider 감싸기</h2>
+- main.jsx
+```jsx
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
+);
+```
+
+- `Provider` 컴포넌트는 React 애플리케이션에 Redux 스토어를 제공한다.
+- `store` prop에는 위에서 생성한 Redux 스토어가 전달된다.
+- 이렇게 함으로써 애플리케이션 내의 모든 컴포넌트가 Redux 스토어의 상태에 접근하고 업데이트할 수 있게 된다.
+
+
+- Redux 스토어에 정의된 상태와 리듀서를 사용하여 컴포넌트들이 상태를 공유하고 업데이트할 수 있다.
+
+</details>
