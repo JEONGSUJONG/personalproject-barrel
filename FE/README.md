@@ -411,7 +411,9 @@ export const store = configureStore({
 
 
 <h2>Provider 감싸기</h2>
+
 - main.jsx
+
 ```jsx
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -428,5 +430,26 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 
 - Redux 스토어에 정의된 상태와 리듀서를 사용하여 컴포넌트들이 상태를 공유하고 업데이트할 수 있다.
+
+
+</details>
+
+<details>
+<summary>📅 2024.01.31</summary>
+
+serializableCheck
+
+- serialize : object 값을 string 값으로 변환 (JSON.stringify)
+- deserialize : string 값을 object 값으로 변환 (JSON.parse)
+
+action에 직렬화(serialize)가 불가능한 값 (non-serializable value)을 전달되면 에러가 나온다..!
+
+- action이 디스패치하게 될 때 serialize 한 function이 들어가 있어서 에러가 나옴.
+  - redux persist를 사용할 때 이러한 에러를 안보이게 하려면 serializableChekc를 false 하면 에러가 안나옴.
+
+
+https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ko
+
+![image](https://github.com/JEONGSUJONG/readme-main/assets/142254876/e702770c-dc83-4ec0-945e-6d146491d95c)
 
 </details>
