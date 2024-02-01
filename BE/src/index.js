@@ -7,23 +7,14 @@ const mongoose = require("mongoose");
 
 app.use(express.json());
 app.use(cors());
-
-app.get("/", (req, res, next) => {
-  setImmediate(() => {
-    next(new Error("This is Error"));
-  });
-});
-
-app.use((error, req, res, next) => {
-  res.status(500).send(error.message || "Internal Server Error");
-});
-
-app.post("/", (req, res) => {
-  console.log(req.body);
-  res.json(req.body);
-});
-
 app.use(express.static("public"));
+
+//router
+const HelloRouter = require("./routes/hello-router");
+const UserRouter = require("./routes/users-router");
+
+app.use('/api/v1', HelloRouter);
+app.use('/api/v1/users', UserRouter);
 
 // mongoose
 mongoose

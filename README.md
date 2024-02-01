@@ -33,7 +33,7 @@
 ## 🔨 주요 기술
 
 **Frontend**
-React / Vite / Tailwind
+React / Vite / Tailwind / Axios
 
 **Backend**
 
