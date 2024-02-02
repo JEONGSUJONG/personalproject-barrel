@@ -519,4 +519,16 @@ UserRouter.post("/login", async (req, res, next) => {
 })
 ```
 
+- `userSchema` 에서 받아온 `isMatch` 로 평문과 암호화된 비밀번호를 비교한 값으로 판단한다.
+- `payload` 는 토큰에 담기는 정보를 정의하고 여기선userId가 들어가있다.
+- `JWT.sign` 메소드는 `payload` 와 Secret Key로 JWT 토큰을 생성한다.
+
+![image](https://github.com/JEONGSUJONG/readme-main/assets/142254876/0704814d-5c12-407b-94d2-aa7c6cf75186)
+
+- `return res.json({ user, accessToken })` 에서 user 데이터를 반환하면 보안적 측면에서 위험하지 않을까?
+  - Client와 Server간의 통신에서 인증 정보를 주고 받을 때 일반적으로 db에 저장된 회원 객체에서 Access Token은 필요한 정보만 추출하여 따로 저장하게 된다.
+  - 또한, user 데이터를 반환하면 클라이언트에서 해당 정보를 사용하여 로그인한 사용자의 상태를 지속적으로 유지할 수 있다.
+    - 로그인 한 번 하고나면 토큰을 이용하여 인증 정보를 검증할 때마다 모든 인증과정을 반복할 필요가 없이 로그인 상태가 유지된다.
+
+
 </details>
