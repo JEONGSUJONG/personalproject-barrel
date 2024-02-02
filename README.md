@@ -36,6 +36,7 @@
 React / Vite / Tailwind / Axios
 
 **Backend**
+Node.js / Express / MongoDB / Multer / 
 
 **Frontend - React 18.2.0**
 

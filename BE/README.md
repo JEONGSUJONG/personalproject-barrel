@@ -421,5 +421,102 @@ https://github.com/JEONGSUJONG/readme-main/assets/142254876/32c6a1a9-0cc9-4956-b
 
 <h2>JWT</h2>
 
+- JWT (JSON Web Token) : 당사자간에 정보를 JSON 개체로 안전하게 전송하기 위한 컴팩트하고 독립적인 방식을 정의하는 개방형 표준 (RFC 7519) 이다. 
+- 정보를 안전하게 전할 때 혹은 유저의 권한 같은 것을 체크 하기 위해서 사용되는 모듈
+
+<h3>JWT 구조</h3>
+
+[https://jwt.io/](https://jwt.io/)
+
+![image](https://github.com/JEONGSUJONG/readme-main/assets/142254876/fdb509bc-a3c4-466b-bdba-c07a3014ff69)
+
+- Header(red) : Token에 대한 메타 데이터 포함 (타입, 해싱 알고리즘)
+- Payload(purple) : 유저 정보(issuer), 만료 기간(expiration time), 주제(subject) 등등 ..
+- Verify Signature(blue) : Token이 보낸 사람에 의해 서명되었으며 어떤 식으로도 변경되지 않았는지 확인하는 데 사용되는 서명
+  - 서명은 헤더 및 페이로드 세그먼트, 서명 알고리즘, 비밀 / 공개 키를 사용하여 생성됨.
+
+![image](https://github.com/JEONGSUJONG/readme-main/assets/142254876/b04d0b49-9d7f-4377-993a-58355ae17503)
+
+1. Admin 유저가 보고자 할 경우 (관리자 권한 페이지)
+2. 요청을 보낼 때 Token을 Header에 넣어서 같이 보냄
+3. 서버에서는 JWT를 이용하여 Token을 다시 생성한 후 두 개를 비교
+  - 서버에서 요청에서 같이 온 Header랑 payload를 가져오고 서버안에 있는 Secret 을 이용하여 Signature 부분을 다시 생성
+  - Client에서 온 Headers + Client에서 온 Payload + Server에서 갖고 있는 Secret Text
+4. 일치하면 Admin 유저가 원하는 글을 볼 수 있다.
+
+
+<h1>Login Router 생성</h1>
+
+- FE 
+
+```jsx
+const response = await axiosInstance.post(`/users/login`, body);
+```
+
+- 현재 post 요청을 받아올 API 가 필요하다
+
+- users-router.js
+
+```javascript
+// Login
+UserRouter.post("/login", async (req, res, next) => {
+  // req.body : email , password
+  try {
+    // 존재하는 유저인지 체크
+
+    // 비밀번호가 올바른지 체크 (comparePassword 함수)
+
+    // JWT 토큰생성
+
+    // 토큰 생성 후 유저와 토큰 데이터 응답으로 보내주기
+  } catch (error) {
+    
+  }
+})
+```
+
+- comparePassword 함수는 user-shema 에서 정의한다.
+
+```javascript
+userSchema.methods.comparePassword = async function (plainPassword) {
+  let user = this;
+
+  const isMatch = await bcrypt.compare(plainPassword, user.password);
+  return isMatch;
+};
+```
+
+- 기능은 사용자의 비밀번호 비교를 수행한다.
+- `plainPassword` 를 해시된 비밀번호와 비교하여 일치 여부를 return 한다.
+
+- users-router.js
+
+```javascript
+// Login
+UserRouter.post("/login", async (req, res, next) => {
+  // req.body : email , password(plainText)
+  try {
+    // 존재하는 유저인지 체크
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(400).send("Auth failed, email not found");
+    }
+    // 비밀번호가 올바른지 체크
+    const isMatch = await user.comparePassword(req.body.password);
+    if (!isMatch) {
+      return res.status(400).send("Wrong password");
+    }
+    const payload = {
+      userId: user._id.toHexString(), // Obj Id 이기 때문에 String으로 변환
+    }
+    // JWT Token 생성
+    const accessToken = JWT.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+    // 토큰 생성 후 유저와 토큰 데이터 응답으로 보내주기
+    return res.json({ user, accessToken });
+  } catch (error) {
+    next(error);
+  }
+})
+```
 
 </details>
