@@ -10,12 +10,9 @@ app.use(cors());
 app.use(express.static("public"));
 
 //router
-const HelloRouter = require("./routes/hello-router");
 const UserRouter = require("./routes/users-router");
 
-app.use('/api/v1', HelloRouter);
 app.use('/api/v1/users', UserRouter);
-app.use('/api/v1/login', UserRouter);
 
 // mongoose
 mongoose

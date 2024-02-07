@@ -2,6 +2,7 @@ const express = require("express");
 const UserRouter = express.Router();
 const User = require("../models/user-schema");
 const JWT = require("jsonwebtoken");
+const auth = require("../middleware/auth");
 
 // Register
 UserRouter.post("/register", async (req, res, next) => {
@@ -14,32 +15,38 @@ UserRouter.post("/register", async (req, res, next) => {
   }
 });
 
-
 // Login
 UserRouter.post("/login", async (req, res, next) => {
-  // req.body : email , password(plainText)
   try {
-    // 존재하는 유저인지 체크
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
       return res.status(400).send("Auth failed, email not found");
     }
-    // 비밀번호가 올바른지 체크
     const isMatch = await user.comparePassword(req.body.password);
     if (!isMatch) {
       return res.status(400).send("Wrong password");
     }
     const payload = {
-      userId: user._id.toHexString(), // Obj Id 이기 때문에 String으로 변환
-    }
-    // Token 생성
-    const accessToken = JWT.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
-    // 토큰 생성 후 유저와 토큰 데이터 응답으로 보내주기
+      userId: user._id.toHexString(),
+    };
+    const accessToken = JWT.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
     return res.json({ user, accessToken });
   } catch (error) {
     next(error);
   }
-})
+});
 
+// Auth by Token
+UserRouter.get("/auth", auth, async (req, res, next) => {
+  return res.json({
+    id: req.user._id,
+    email: req.user.email,
+    name: req.user.name,
+    role: req.user.role,
+    image: req.user.image,
+  });
+});
 
 module.exports = UserRouter;

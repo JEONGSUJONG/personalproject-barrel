@@ -532,3 +532,69 @@ UserRouter.post("/login", async (req, res, next) => {
 
 
 </details>
+
+
+<details>
+<summary>📅 2024.02.07</summary>
+
+<h1>Auth By </h1>
+
+FE 페이지 링크 올리기
+
+- users-router.js
+
+```javascript
+// Auth by Token
+UserRouter.post("/auth", auth, async (req, res, next) => {
+  return res.json({
+    id: req.user._id,
+    email: req.user.email,
+    name: req.user.name,
+    role: req.user.role,
+    image: req.user.image,
+  });
+});
+```
+
+- "/auth" 엔드 포인트에 대한 Post 요청을 처리한다.
+- 요청이 들어오면 `auth` 미들웨어를 실행하여 토큰의 유효성 검사 후 사용자 인증을 한다.
+- JSON 형식으로 반환
+
+- auth.js : 이 미들웨어는 클라이언트에서 HTTP 요청으로 받아온 Token을 헤더에서 가져와 분석한다.
+
+```javascript
+const jwt = require('jsonwebtoken');
+const User = require("../models/user-schema");
+
+let auth = async (req, res, next) => {
+    // Token을 request headers 에서 가져오기
+    const authHeader = req.headers['authorization'];
+
+    // Bearer ---.---.---
+    const token = authHeader && authHeader.split(" ")[1];
+    if (token === null) return res.sendStatus(401);
+
+    try {
+        // Token이 유효한지 확인
+        const decode = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findOne({ _id: decode.userId });
+
+        if (!user) {
+            return res.status(400).send("사용자를 찾을 수 없습니다.");
+        }
+        req.user = user;
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = auth;
+```
+
+![image](https://github.com/JEONGSUJONG/readme-main/assets/142254876/20fd7eda-760a-4dfb-93e0-111b63621021)
+
+- `Bearer ---.---.---` 형식의 토큰을 `" "` 로 구분하여 헤더 중 토큰 부분만 가져온다.
+- jwt decode 를 이용하여 유효한지 검사한다.
+
+</details>
