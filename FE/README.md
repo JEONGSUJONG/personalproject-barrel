@@ -927,41 +927,41 @@ import { Link } from "react-router-dom";
 import NavItem from "./Sections/NavItem";
 
 const Navbar = () => {
-  // 메뉴 상태를 관리하는 useState 훅을 사용하여 메뉴의 열림/닫힘 여부를 저장합니다.
+  // 메뉴 상태를 관리하는 useState 훅을 사용하여 메뉴의 열림/닫힘 여부를 저장
   const [menu, setMenu] = useState(false);
 
-  // 메뉴를 열고 닫는 함수입니다.
+  // 메뉴를 열고 닫는 함수
   const handleMenu = () => {
     setMenu(!menu);
   };
 
   return (
-    // 네비게이션 바를 감싸는 nav 요소입니다.
+    // 네비게이션 바를 감싸는 nav 요소
     <nav className="relative z-10 text-white bg-black">
       <div className="w-full">
         <div className="flex items-center justify-between mx-5 sm:mx-10 lg:mx-20">
-          {/* 로고 섹션입니다. */}
+          {/* 로고 섹션 */}
           <div className="flex items-center text-4xl h-16">
-            {/* 홈으로 이동할 수 있는 로고 링크입니다. */}
+            {/* 홈으로 이동할 수 있는 로고 링크*/}
             <Link to="/">Logo</Link>
           </div>
 
-          {/* 메뉴 버튼 섹션입니다. 작은 화면 크기에서만 표시됩니다. */}
+          {/* 메뉴 버튼 섹션. 작은 화면 크기에서 표시 */}
           <div className="text-2xl sm:hidden">
-            {/* 메뉴 버튼을 클릭하면 handleMenu 함수가 호출되어 메뉴가 열리거나 닫힙니다. */}
+            {/* 메뉴 버튼을 클릭하면 handleMenu 함수가 호출되어 메뉴 여닫이 가능 */}
             <button onClick={handleMenu}>{menu ? "-" : "+"}</button>
           </div>
 
-          {/* 데스크톱 화면 크기에서 표시되는 네비게이션 메뉴 섹션입니다. */}
+          {/* 데스크톱 화면 크기에서 표시되는 네비게이션 메뉴 섹션. */}
           <div className="hidden sm:block">
-            {/* NavItem 컴포넌트를 사용하여 네비게이션 메뉴를 표시합니다. */}
+            {/* NavItem 컴포넌트를 사용하여 네비게이션 메뉴를 표시. */}
             <NavItem />
           </div>
         </div>
 
-        {/* 모바일 화면 크기에서 표시되는 네비게이션 메뉴 섹션입니다. */}
+        {/* 모바일 화면 크기에서 표시되는 네비게이션 메뉴 섹션. */}
         <div className="block sm:hidden">
-          {/* 메뉴가 열려있을 때에만 NavItem 컴포넌트를 표시합니다. */}
+          {/* 메뉴가 열려있을 때에만 NavItem 컴포넌트를 표시. */}
           {menu && <NavItem />}
         </div>
       </div>
@@ -972,6 +972,59 @@ const Navbar = () => {
 export default Navbar;
 ```
 
-- 
+
+<h2>Navbar Item</h2>
+
+```jsx
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+const routes = [
+  { to: "/login", name: "SIGN IN", auth: false },
+  { to: "/register", name: "SIGN UP", auth: false },
+  { to: "", name: "LOGOUT", auth: true },
+];
+
+const NavItem = ({mobile}) => {
+  const isAuth = useSelector((state) => state.user?.isAuth);
+  const handleLogout = () => {
+
+  }
+
+  return (
+    <ul
+      className={`text-sm justify-center w-full gap-4 ${
+        mobile ? "flex-col bg-white text-black h-full items-center" : ""
+      }`}
+    >
+      {routes.map(({ to, name, auth }) => {
+        if (isAuth !== auth) return null;
+        if (name === "LOGOUT") {
+          return (
+            <li
+              key={name}
+              className="py-2 text-center border-b-2 cursor-pointer"
+            >
+              <Link onClick={handleLogout}>{name}</Link>
+            </li>
+          );
+        } else {
+          return (
+            <li
+              key={name}
+              className="py-2 text-center border-b-2 cursor-pointer"
+            >
+              <Link to={to}>{name}</Link>
+            </li>
+          );
+        }
+      })}
+    </ul>
+  );
+};
+
+export default NavItem;
+```
 
 </details>

@@ -49,4 +49,13 @@ UserRouter.get("/auth", auth, async (req, res, next) => {
   });
 });
 
+// Logout
+UserRouter.post("/logout", auth, async (req, res, next) => {
+  try {
+    return res.sendStatus(200);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = UserRouter;

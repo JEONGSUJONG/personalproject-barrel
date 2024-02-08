@@ -9,15 +9,15 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative z-10 text-white bg-black">
-      <div className="w-full">
+    <nav className="text-black">
+      <div>
         <div className="flex items-center justify-between mx-5 sm:mx-10 lg:mx-20">
           
           {/* 로고 넣어주기 (home 버튼) */}
-          <div className="flex items-center text-4xl h-16">
+          <div className="flex items-center text-2xl h-16">
             <Link to="/">Logo</Link>
           </div>
-
+          
           {/* Menu 버튼 */}
           <div className="text-2xl sm:hidden">
             <button onClick={handleMenu}>{menu ? "-" : "+"}</button>
@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
         {/* 모바일 사이즈 */}
         <div className="block sm:hidden">
-          {menu && <NavItem />}
+          {menu && <NavItem mobile/>}
         </div>
       </div>
     </nav>
