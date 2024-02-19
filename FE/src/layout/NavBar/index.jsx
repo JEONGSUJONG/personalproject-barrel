@@ -9,7 +9,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="text-black">
+    <nav className="text-black shadow-md">
       <div>
         <div className="flex items-center justify-between mx-5 sm:mx-10 lg:mx-20">
           
