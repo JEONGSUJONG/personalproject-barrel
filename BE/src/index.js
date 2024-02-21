@@ -11,8 +11,10 @@ app.use(express.static("public"));
 
 //router
 const UserRouter = require("./routes/users-router");
+const ProductRouter = require("./routes/product-router");
 
 app.use('/api/v1/users', UserRouter);
+app.use('/api/v1/products', ProductRouter)
 
 // mongoose
 mongoose
