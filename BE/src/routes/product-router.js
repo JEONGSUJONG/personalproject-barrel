@@ -36,5 +36,16 @@ ProductRouter.post("/image", auth, async (req, res, next) => {
   });
 });
 
+ProductRouter.get("/", async (req, res, next) => {
+  try {
+    const products = await Product.find().populate('writer');
+    return res.status(200).json({
+      products
+    })
+  } catch (error) {
+    next(error)
+  }
+});
+
 
 module.exports = ProductRouter;
