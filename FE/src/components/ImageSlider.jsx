@@ -1,5 +1,5 @@
 import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
 const ImageSlider = ({ images }) => {
@@ -10,7 +10,6 @@ const ImageSlider = ({ images }) => {
           <img
             src={`${import.meta.env.VITE_SERVER_URL}/${image}`}
             alt={image}
-            className="w-full h-[120px]"
           />
         </div>
       ))}

@@ -1,4 +1,4 @@
-# NIKE Clone Coding
+# BARREL Clone Coding
 
 [LOGO]
 

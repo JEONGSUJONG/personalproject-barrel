@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NavItem from "./Sections/NavItem";
+import { FaAngleDown } from "react-icons/fa";
+import { FaAngleUp } from "react-icons/fa";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
@@ -9,30 +11,30 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="text-black shadow-md">
+    <nav className="text-black shadow-md fixed top-0 w-full z-10 bg-white">
       <div>
         <div className="flex items-center justify-between mx-5 sm:mx-10 lg:mx-20">
-          
           {/* 로고 넣어주기 (home 버튼) */}
           <div className="flex items-center text-2xl h-16">
-            <Link to="/">Logo</Link>
+            <Link to="/">
+              <img src="/logo.png" alt="Home" />
+            </Link>
           </div>
-          
+
           {/* Menu 버튼 */}
           <div className="text-2xl sm:hidden">
-            <button onClick={handleMenu}>{menu ? "-" : "+"}</button>
+            <button onClick={handleMenu}>
+              {menu ? <FaAngleUp /> : <FaAngleDown />}
+            </button>
           </div>
 
           {/* 웹 사이즈 */}
           <div className="hidden sm:block">
             <NavItem />
           </div>
-
         </div>
         {/* 모바일 사이즈 */}
-        <div className="block sm:hidden">
-          {menu && <NavItem mobile/>}
-        </div>
+        <div className="block sm:hidden">{menu && <NavItem mobile />}</div>
       </div>
     </nav>
   );

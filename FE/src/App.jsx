@@ -20,7 +20,7 @@ import UploadProductPage from "./pages/UploadProductPage";
 
 function Layout() {
   return (
-    <div className="flex flex-col h-screen justify-between">
+    <div className="flex flex-col justify-between h-screen">
       <ToastContainer
         position="bottom-right"
         autoClose={1500}
@@ -28,7 +28,7 @@ function Layout() {
         transition:Slide
       />
       <Navbar />
-      <main className="mb-auto w-10/12 max-w-4xl mx-auto">
+      <main className="mx-auto">
         <Outlet />
       </main>
       <Footer />

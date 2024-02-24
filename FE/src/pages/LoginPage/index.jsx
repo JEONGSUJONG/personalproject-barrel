@@ -36,11 +36,11 @@ const LoginPage = () => {
   };
 
   return (
-    <section className="flex flex-col justify-center mt-20 max-w-[400px] m-auto">
+    <section className="flex flex-col justify-center mt-10 m-auto" >
       <div className="p-6 bg-white rounded-md shadow-md">
         <h1 className="text-3xl font-semibold text-center">로그인</h1>
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-2">
+        <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-4">
             <label
               htmlFor="email"
               className="text-sm font-semibold text-center"
@@ -89,9 +89,7 @@ const LoginPage = () => {
             </button>
             <p className="mt-8 text-xs font-light text-center text-gray-700">
               아이디가 없다면? {""}
-              <a
-                href="/register"
-                className="font-medium hover:underline">
+              <a href="/register" className="font-medium hover:underline">
                 회원가입
               </a>
             </p>
