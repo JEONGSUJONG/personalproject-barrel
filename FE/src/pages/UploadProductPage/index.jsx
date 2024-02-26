@@ -4,18 +4,20 @@ import axiosInstance from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
 import FileUpload from "../../components/FileUpload";
 
-const continents = [
-  { key: 1, value: "Man" },
-  { key: 2, value: "Woman" },
-  { key: 3, value: "Shoes" },
+const category = [
+  { key: 1, value: "MEN" },
+  { key: 2, value: "WOMEN" },
+  { key: 3, value: "ACCESSORIES" },
 ];
 
 const UploadProductPage = () => {
   const [product, setProduct] = useState({
     title: "",
     description: "",
+    category: 1,
     price: 0,
-    continents: 1,
+    color: "", // color 추가
+    size: "", // size 추가
     images: [],
   });
 
@@ -54,16 +56,14 @@ const UploadProductPage = () => {
   };
 
   return (
-    <section className="w-full my-[100px]">
+    <section className="w-full mt-[100px]">
       <div className="flex justify-center text-center text-4xl">
         <h1>상품 등록</h1>
       </div>
 
       <form className="my-10" onSubmit={handleSubmit}>
         <div className="flex justify-center mt-[25px]">
-          {/* 이름, 설명 */}
           <div className="w-[45%] pl-10">
-            {/* 이름 */}
             <div className="">
               <label htmlFor="title" className="font-bold">
                 TITLE
@@ -91,17 +91,20 @@ const UploadProductPage = () => {
             </div>
 
             <div className="">
-              <label htmlFor="continents" className="font-bold">
+              <label htmlFor="category" className="font-bold">
+                {" "}
+                {/* continents -> category로 수정 */}
                 CATEGORY
               </label>
               <select
                 className="w-full border-2 mt-2 mb-10"
-                name="continents"
-                id="continents"
+                name="category"
+                id="category"
                 onChange={handleChange}
-                value={product.continents}
+                value={product.category}
               >
-                {continents.map((item) => (
+                {/* continents -> category로 수정 */}
+                {category.map((item) => (
                   <option key={item.key} value={item.key}>
                     {item.value}
                   </option>
@@ -126,48 +129,57 @@ const UploadProductPage = () => {
             </div>
 
             <div className="">
-              <label htmlFor="description" className="font-bold">
+              <label htmlFor="color" className="font-bold">
+                {" "}
+                {/* description -> color로 수정 */}
                 COLOR
               </label>
               <input
                 className="w-full border-2 mt-2 mb-10"
-                name="description"
-                id="description"
+                name="color"
+                id="color"
                 onChange={handleChange}
               />
             </div>
 
             <div className="">
-              <label htmlFor="continents" className="font-bold">
+              <label htmlFor="size" className="font-bold">
                 SIZE
               </label>
               <select
                 className="w-full border-2 mt-2 mb-10"
-                name="continents"
-                id="continents"
+                name="size"
+                id="size"
                 onChange={handleChange}
+                value={product.size}
               >
-                {continents.map((item) => (
-                  <option key={item.key} value={item.key}>
-                    {item.value}
-                  </option>
-                ))}
+                <option value="">One Size</option>
+                {/* 80부터 110까지 5씩 증가하는 옵션 생성 */}
+                {Array.from({ length: 7 }, (_, index) => {
+                  const size = 80 + index * 5;
+                  const sizeString = size.toString().padStart(3, "0");
+                  return (
+                    <option key={index} value={sizeString}>
+                      {sizeString}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
         </div>
 
         <FileUpload images={product.images} onImageChange={handleImages} />
-      </form>
 
-      <div className="mt-4 text-center">
-        <button
-          type="submit"
-          className="bg-black text-white py-2 rounded px-6 hover:bg-gray-700 ease-in-out"
-        >
-          CREATE
-        </button>
-      </div>
+        <div className="mt-4 text-center">
+          <button
+            type="submit"
+            className="bg-black text-white py-2 rounded px-6 hover:bg-gray-700 ease-in-out my-10"
+          >
+            CREATE
+          </button>
+        </div>
+      </form>
     </section>
   );
 };

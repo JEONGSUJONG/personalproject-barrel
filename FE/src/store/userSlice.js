@@ -77,6 +77,7 @@ const userSlice = createSlice({
         state.userData = initialState.userData;
         state.isAuth = false;
         localStorage.removeItem("accessToken");
+        window.location.reload();
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;

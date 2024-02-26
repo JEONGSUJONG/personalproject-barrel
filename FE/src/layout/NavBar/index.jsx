@@ -1,40 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import NavItem from "./Sections/NavItem";
-import { FaAngleDown } from "react-icons/fa";
-import { FaAngleUp } from "react-icons/fa";
 
 const Navbar = () => {
-  const [menu, setMenu] = useState(false);
-  const handleMenu = () => {
-    setMenu(!menu);
-  };
 
   return (
-    <nav className="text-black shadow-md fixed top-0 w-full z-10 bg-white">
+    <nav className="text-black shadow-md fixed top-0 w-full z-10 bg-white py-2">
       <div>
-        <div className="flex items-center justify-between mx-5 sm:mx-10 lg:mx-20">
-          {/* 로고 넣어주기 (home 버튼) */}
+        <div className="flex items-center justify-between mx-20">
           <div className="flex items-center text-2xl h-16">
             <Link to="/">
-              <img src="/logo.png" alt="Home" />
+              <img src="/cyanlogo.png" alt="Home" />
             </Link>
           </div>
-
-          {/* Menu 버튼 */}
-          <div className="text-2xl sm:hidden">
-            <button onClick={handleMenu}>
-              {menu ? <FaAngleUp /> : <FaAngleDown />}
-            </button>
-          </div>
-
-          {/* 웹 사이즈 */}
-          <div className="hidden sm:block">
+          <div>
             <NavItem />
           </div>
         </div>
-        {/* 모바일 사이즈 */}
-        <div className="block sm:hidden">{menu && <NavItem mobile />}</div>
       </div>
     </nav>
   );

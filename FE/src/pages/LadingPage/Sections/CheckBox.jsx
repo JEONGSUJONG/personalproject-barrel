@@ -1,9 +1,34 @@
-import React from 'react'
+import React from "react";
 
-const CheckBox = () => {
+const CheckBox = ({ continents, checkedContinents, onFilters }) => {
+  const handleToggle = (continentId) => {
+    // currentCheckBox가 이미 누른 Check인지 체크
+    const currentIndex = checkedContinents.indexOf(continentId);
+    const newChecked = [...checkedContinents]; // 불변성 유지
+
+    if (currentIndex === -1) {
+      newChecked.push(continentId);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    onFilters(newChecked);
+  };
   return (
-    <div>CheckBox</div>
-  )
-}
+    <div className="h-[16vh] p-2 mb-3 border-2">
+      {continents?.map((continent) => (
+        <div key={continent._id}>
+          <input
+            type="checkbox"
+            onChange={() => handleToggle(continent._id)}
+            checked={
+              checkedContinents.indexOf(continent._id) === -1 ? false : true
+            }
+          />{" "}
+          <label>{continent.name}</label>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-export default CheckBox
+export default CheckBox;

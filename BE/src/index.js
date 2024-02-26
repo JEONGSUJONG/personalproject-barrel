@@ -14,11 +14,13 @@ app.use(express.static("public"));
 const HelloRouter = require("./routes/hello-router");
 const UserRouter = require("./routes/users-router");
 const ProductRouter = require("./routes/product-router");
+const LikeRouter = require("./routes/like-router");
 
 app.use("/api/v1", HelloRouter);
 app.use('/api/v1/users', UserRouter);
 app.use('/api/v1/products', ProductRouter);
 app.use(express.static(path.join(__dirname, "../uploads")));
+app.use('/api/v1/like', LikeRouter);
 
 // mongoose
 mongoose

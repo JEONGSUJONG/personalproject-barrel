@@ -20,17 +20,21 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  phone: {
+    type: String,
+    unique: 1,
+  },
   image: {
     type: String,
   },
   cart: {
     type: Array,
-    default: []
+    default: [],
   },
   history: {
     type: Array,
-    default: []
-  }
+    default: [],
+  },
 });
 
 userSchema.pre("save", async function (next) {
