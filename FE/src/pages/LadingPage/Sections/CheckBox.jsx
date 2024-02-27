@@ -14,7 +14,9 @@ const CheckBox = ({ continents, checkedContinents, onFilters }) => {
     onFilters(newChecked);
   };
   return (
-    <div className="h-[16vh] p-2 mb-3 border-2">
+    <div className="pl-14 my-8">
+      <p className="px-3 pt-3 font-bold text-xl">CATEGORY</p>
+      <hr className="w-10/12 my-4" />
       {continents?.map((continent) => (
         <div key={continent._id}>
           <input

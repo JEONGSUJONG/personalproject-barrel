@@ -11,7 +11,7 @@ const backgroundImg = [
 
 const MainImage = () => {
   return (
-    <div className="w-[100vw] pt-[9vh]">
+    <div className="w-[100vw] h-[100%] pt-[80px]">
       <LogoSlider />
       <div className="max-w-[100%]">
         <SimpleImageSlider

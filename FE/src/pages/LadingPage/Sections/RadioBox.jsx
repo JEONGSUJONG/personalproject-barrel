@@ -2,7 +2,9 @@ import React from "react";
 
 const RadioBox = ({ prices, checkedPrice, onFilters }) => {
   return (
-    <div className="h-[16vh] p-2 mb-3 border-2">
+    <div className="pl-14 my-8">
+      <p className="px-3 pt-3 font-bold text-xl">PRICE</p>
+      <hr className="w-10/12 my-4" />
       {prices?.map((price) => (
         <div key={price._id}>
           <input

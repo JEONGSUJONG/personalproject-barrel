@@ -41,34 +41,34 @@ const LandingPage = () => {
     };
     try {
       const response = await axiosInstance.get("/products", { params });
-      
+
       setProducts(
         loadMore
           ? [...products, ...response.data.products]
           : response.data.products
       );
 
-//  if (loadMore) {
-//    setProducts([...products, ...response.data.products]);
-//  } else {
-//    setProducts(response.data.hasMore);
-//  }
+      //  if (loadMore) {
+      //    setProducts([...products, ...response.data.products]);
+      //  } else {
+      //    setProducts(response.data.hasMore);
+      //  }
 
-// 문제는 두 번째 줄에서 setProducts를 호출할 때 발생합니다. 여기서는 잘못된 값이 products에 설정되고 있습니다.
+      // 문제는 두 번째 줄에서 setProducts를 호출할 때 발생합니다. 여기서는 잘못된 값이 products에 설정되고 있습니다.
 
-// javascript
-// Copy code
-// setProducts(response.data.hasMore);
-// 여기서 response.data.hasMore는 불리언 값(true 또는 false)입니다. 하지만 products는 일반적으로 상품 목록을 담는 배열이어야 합니다. 그러나 이 코드는 불리언 값을 products에 설정하고 있어서 products가 배열이 아닌 불리언 값이 되는 문제가 발생합니다.
+      // javascript
+      // Copy code
+      // setProducts(response.data.hasMore);
+      // 여기서 response.data.hasMore는 불리언 값(true 또는 false)입니다. 하지만 products는 일반적으로 상품 목록을 담는 배열이어야 합니다. 그러나 이 코드는 불리언 값을 products에 설정하고 있어서 products가 배열이 아닌 불리언 값이 되는 문제가 발생합니다.
 
-// 따라서 response.data.hasMore를 products에 설정하는 대신에, response.data.products를 products에 추가해야 합니다.
+      // 따라서 response.data.hasMore를 products에 설정하는 대신에, response.data.products를 products에 추가해야 합니다.
 
-// 이제 두 가지 경우에 대한 상품 목록을 올바르게 처리하도록 수정된 코드는 다음과 같습니다:
+      // 이제 두 가지 경우에 대한 상품 목록을 올바르게 처리하도록 수정된 코드는 다음과 같습니다:
 
-// javascript
-// Copy code
-// setProducts(loadMore ? [...products, ...response.data.products] : response.data.products);
-// 여기서 loadMore가 true일 때는 현재 상품 목록에 새로운 상품 목록을 추가하고, loadMore가 false일 때는 새로운 상품 목록으로 바로 설정합니다.
+      // javascript
+      // Copy code
+      // setProducts(loadMore ? [...products, ...response.data.products] : response.data.products);
+      // 여기서 loadMore가 true일 때는 현재 상품 목록에 새로운 상품 목록을 추가하고, loadMore가 false일 때는 새로운 상품 목록으로 바로 설정합니다.
 
       setHasMore(response.data.hasMore);
     } catch (error) {
@@ -148,7 +148,7 @@ const LandingPage = () => {
         <BestItem />
       </div>
       <div className="text-center text-4xl my-[80px] font-bold">NEW ITEM</div>
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center w-[100vw]">
         <RecommendCard />
       </div>
 
@@ -157,7 +157,8 @@ const LandingPage = () => {
           WELCOME TO BARREL
         </div>
         <div>
-          <div className="flex justify-end mb-2">
+          <div className="flex justify-end my-8 ">
+            <p className="mr-5 text-gray-400">FILTER</p>
             <Switch
               onChange={toggleFilter}
               checked={isOpen}
@@ -168,7 +169,7 @@ const LandingPage = () => {
             />
           </div>
           {isOpen && (
-            <div className="flex gap-2">
+            <div className="flex gap-2 p-4 bg-gray-50">
               <div className="w-1/2">
                 <CheckBox
                   continents={continents}
