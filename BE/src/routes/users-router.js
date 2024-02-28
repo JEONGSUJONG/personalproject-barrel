@@ -60,4 +60,46 @@ UserRouter.post("/logout", auth, async (req, res, next) => {
   }
 });
 
+UserRouter.post("/cart", auth, async (req, res, next) => {
+  try {
+    const userInfo = await User.findOne({ _id: req.user._id })
+    // 이미 등록할 상품이 존재하는 지 체크
+    let duplicate = false;
+    userInfo.cart.forEach((item) => {
+      if (item.id === req.body.productId) {
+        duplicate = true;
+      }
+    });
+
+    // duplicate = true 일 경우
+    if (duplicate) {
+      const user = await User.findOneAndUpdate(
+        { _id: req.user._id, "cart_id": req.body.productId },
+        { $inc: { "cart.$.quantity": 1 } },
+        { new: true }
+      )
+      return res.status(201).send(user.cart);
+    }
+    // duplicate = false 일 경우
+    else {
+      const user = await User.findOneAndUpdate(
+        { _id: req.user._id },
+        {
+          $push: {
+            cart: {
+              id: req.body.productId,
+              quantity: 1,
+              date: Date.now()
+            }
+          }
+        },
+        { new: true }
+      )
+      return res.status(201).send(user.cart);
+    }
+  } catch (error) {
+
+  }
+});
+
 module.exports = UserRouter;
