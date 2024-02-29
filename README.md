@@ -1,6 +1,6 @@
 # BARREL Clone Coding
 
-[LOGO]
+[LOGO] 넣기
 
 ## 👨‍💻 팀원 소개
 
