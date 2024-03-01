@@ -23,7 +23,7 @@ const LoginPage = () => {
     reset();
   };
 
-  
+
   const userEmail = {
     required: "이메일을 입력해주세요.",
   };
@@ -31,7 +31,7 @@ const LoginPage = () => {
     required: "비밀번호를 입력해주세요.",
     minLength: {
       value: 6,
-      message: "최소 6자입니다.",
+      message: "최소 6자를 입력해주세요.",
     },
   };
 
