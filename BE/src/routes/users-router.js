@@ -1,8 +1,13 @@
 const express = require("express");
 const UserRouter = express.Router();
 const User = require("../models/user-schema");
+const Product = require("../models/product-schema");
+const Payment = require("../models/payment-schema");
 const JWT = require("jsonwebtoken");
 const auth = require("../middleware/auth");
+const crypto = require("crypto");
+const async = require("async");
+const { error } = require("console");
 
 // Register
 UserRouter.post("/register", async (req, res, next) => {
@@ -47,7 +52,7 @@ UserRouter.get("/auth", auth, async (req, res, next) => {
     role: req.user.role,
     image: req.user.image,
     cart: req.user.cart,
-    history: req.user.history
+    history: req.user.history,
   });
 });
 
@@ -62,7 +67,7 @@ UserRouter.post("/logout", auth, async (req, res, next) => {
 
 UserRouter.post("/cart", auth, async (req, res, next) => {
   try {
-    const userInfo = await User.findOne({ _id: req.user._id })
+    const userInfo = await User.findOne({ _id: req.user._id });
     // 이미 등록할 상품이 존재하는 지 체크
     let duplicate = false;
     userInfo.cart.forEach((item) => {
@@ -74,10 +79,11 @@ UserRouter.post("/cart", auth, async (req, res, next) => {
     // duplicate = true 일 경우
     if (duplicate) {
       const user = await User.findOneAndUpdate(
-        { _id: req.user._id, "cart_id": req.body.productId },
+        { _id: req.user._id, "cart.id": req.body.productId },
         { $inc: { "cart.$.quantity": 1 } },
         { new: true }
-      )
+      );
+
       return res.status(201).send(user.cart);
     }
     // duplicate = false 일 경우
@@ -89,16 +95,101 @@ UserRouter.post("/cart", auth, async (req, res, next) => {
             cart: {
               id: req.body.productId,
               quantity: 1,
-              date: Date.now()
-            }
-          }
+              date: Date.now(),
+            },
+          },
         },
         { new: true }
-      )
+      );
       return res.status(201).send(user.cart);
     }
   } catch (error) {
+    next(error);
+  }
+});
 
+// Delete Cart
+UserRouter.delete("/cart", auth, async (req, res, next) => {
+  try {
+    const userInfo = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      {
+        $pull: {
+          cart: { id: req.query.productId },
+        },
+      },
+      { new: true }
+    );
+    const cart = userInfo.cart;
+    const array = cart.map((item) => {
+      return item.id;
+    });
+
+    const productInfo = await Product.find({ _id: { $in: array } }).populate(
+      "writer"
+    );
+    return res.json({
+      productInfo,
+      cart,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Payment
+UserRouter.post("/payment", auth, async (req, res) => {
+  try {
+    // UserCollection안에 History필드 안에 간단한 결제 정보 넣어주기
+    let history = [];
+    let transactionData = {};
+    req.body.cartDetail.forEach((item) => {
+      history.push({
+        dateOfPurchase: new Date().toISOString(),
+        name: item.title,
+        id: item._id,
+        price: item.price,
+        quantity: item.quantity,
+        paymentId: crypto.randomUUID(),
+      });
+    });
+
+    // PaymentCollection안에 자세한 결제 정보를 넣어주기
+    transactionData.user = {
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+    };
+    transactionData.product = history;
+
+    // UserCollection
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $push: { history: { $each: history } }, $set: { cart: [] } }
+    );
+
+    // PaymentCollection
+    const payment = new Payment(transactionData);
+    const paymentDocs = await payment.save();
+
+    let products = [];
+    paymentDocs.product.forEach((item) => {
+      products.push({ id: item.id, quantity: item.quantity });
+    });
+
+    // Update sold count for each product
+    await Promise.all(
+      products.map(async (item) => {
+        await Product.updateOne(
+          { _id: item.id },
+          { $inc: { sold: item.quantity } }
+        );
+      })
+    );
+
+    return res.sendStatus(200);
+  } catch (error) {
+    return res.status(500).send(error.message);
   }
 });
 

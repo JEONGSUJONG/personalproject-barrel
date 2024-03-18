@@ -4,11 +4,11 @@ import RadioBox from "./Sections/RadioBox";
 import CardItem from "./Sections/CardItem";
 import axiosInstance from "../../utils/axios";
 import { IoIosArrowDown } from "react-icons/io";
-import { continents, prices } from "../../utils/filterData";
+import { category, prices } from "../../utils/filterData";
 import Switch from "react-switch";
 import MainImage from "./Sections/MainImage";
 import RecommendCard from "./Sections/RecommendCard";
-import BestItem from "./Sections/BestItem";
+import Cartegory from "./Sections/Cartegory";
 import SearchInput from "./Sections/SearchInput";
 
 const LandingPage = () => {
@@ -18,7 +18,7 @@ const LandingPage = () => {
   const [skip, setSkip] = useState(0);
   const [hasMore, setHasMore] = useState(false);
   const [filters, setFilters] = useState({
-    continents: [],
+    category: [],
     price: [],
   });
 
@@ -144,8 +144,8 @@ const LandingPage = () => {
     <section>
       <MainImage />
       <div className="text-center text-4xl my-[80px] font-bold">
-        BEST ITEM
-        <BestItem />
+        CATEGORY
+        <Cartegory category={category} products={products} />
       </div>
       <div className="text-center text-4xl my-[80px] font-bold">NEW ITEM</div>
       <div className="flex flex-wrap justify-center w-[100vw]">
@@ -172,9 +172,9 @@ const LandingPage = () => {
             <div className="flex gap-2 p-4 bg-gray-50">
               <div className="w-1/2">
                 <CheckBox
-                  continents={continents}
-                  checkedContinents={filters.continents}
-                  onFilters={(filters) => handleFilters(filters, "continents")}
+                  category={category}
+                  checkedCategory={filters.category}
+                  onFilters={(filters) => handleFilters(filters, "category")}
                 />
               </div>
               <div className="w-1/2">

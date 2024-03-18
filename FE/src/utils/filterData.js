@@ -1,16 +1,16 @@
-const continents = [
+const category = [
   {
-    "_id": 1,
-    "name": "MAN",
+    _id: 1,
+    name: "MEN",
   },
   {
-    "_id": 2,
-    "name": "WOMAN",
+    _id: 2,
+    name: "WOMAN",
   },
   {
-    "_id": 3,
-    "name": "ACCESSORIES",
-  }
+    _id: 3,
+    name: "ACCESSORIES",
+  },
 ];
 
 const prices = [
@@ -41,4 +41,4 @@ const prices = [
   },
 ];
 
-export { continents, prices };
+export { category, prices };
