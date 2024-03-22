@@ -45,7 +45,7 @@ const CartPage = () => {
   };
 
   return (
-    <section className="h-[100vh] mt-[120px] mb-[120px]">
+    <section className="h-auto mt-[120px] mb-[120px]">
       <div className="text-center m-7">
         <h2 className="text-2xl">나의 장바구니</h2>
       </div>

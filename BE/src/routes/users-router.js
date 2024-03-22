@@ -9,18 +9,31 @@ const crypto = require("crypto");
 const async = require("async");
 const { error } = require("console");
 
-// Register
-UserRouter.post("/register", async (req, res, next) => {
+// GET /api/v1/users - 모든 사용자 정보 가져오기
+UserRouter.get("/", async (req, res, next) => {
   try {
-    const user = new User(req.body);
-    await user.save();
-    return res.sendStatus(200);
+    const users = await User.find();
+    return res.status(200).json(users);
   } catch (error) {
     next(error);
   }
 });
 
-// Login
+// GET /api/v1/users/:id - 특정 사용자 정보 가져오기
+UserRouter.get("/:id", async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "사용자를 찾을 수 없습니다." });
+    }
+    return res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST /api/v1/users/login - 로그인
 UserRouter.post("/login", async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -38,6 +51,17 @@ UserRouter.post("/login", async (req, res, next) => {
       expiresIn: "1h",
     });
     return res.json({ user, accessToken });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Register
+UserRouter.post("/register", async (req, res, next) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    return res.status(200).json({ user });
   } catch (error) {
     next(error);
   }

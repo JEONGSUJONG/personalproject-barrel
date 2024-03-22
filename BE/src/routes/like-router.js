@@ -4,6 +4,7 @@ const Like = require("../models/like-schema");
 const Product = require("../models/product-schema");
 const auth = require("../middleware/auth");
 
+// PUT /api/v1/like/:productId
 LikeRouter.put("/:productId", auth, async (req, res, next) => {
   const { productId } = req.params;
   const userId = req.user._id;
@@ -19,7 +20,7 @@ LikeRouter.put("/:productId", auth, async (req, res, next) => {
     });
 
     if (existingLike) {
-      // 좋아요 취소
+      // 존재하면 좋아요 취소
       await Like.deleteOne({ product: productId, user: userId });
       await Product.findByIdAndUpdate(productId, {
         $inc: { likeCount: -1 },
@@ -44,12 +45,8 @@ LikeRouter.put("/:productId", auth, async (req, res, next) => {
   }
 });
 
-module.exports = LikeRouter;
-
-
-
-// 좋아요 누른 제품 목록 조회
-LikeRouter.get("/liked-products", auth, async (req, res, next) => {
+// GET /api/v1/like/liked
+LikeRouter.get("/liked", auth, async (req, res, next) => {
   const userId = req.user._id;
   try {
     const likedProducts = await Like.find({ user: userId }).populate("product");
