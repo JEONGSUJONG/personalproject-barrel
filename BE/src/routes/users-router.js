@@ -47,7 +47,7 @@ UserRouter.get("/auth", auth, async (req, res, next) => {
     role: req.user.role,
     image: req.user.image,
     cart: req.user.cart,
-    history: req.user.history
+    history: req.user.history,
   });
 });
 
@@ -55,6 +55,46 @@ UserRouter.get("/auth", auth, async (req, res, next) => {
 UserRouter.post("/logout", auth, async (req, res, next) => {
   try {
     return res.sendStatus(200);
+  } catch (error) {
+    next(error);
+  }
+});
+
+UserRouter.post("/cart", auth, async (req, res, next) => {
+  try {
+    const userInfo = await User.findOne({ _id: req.user._id });
+
+    let duplicate = false;
+    userInfo.cart.forEach((item) => {
+      if (item.id === req.body.productId) {
+        duplicate = true;
+      }
+    });
+
+    if (duplicate) {
+      const user = await User.findOneAndUpdate(
+        { _id: req.user._id, "cart.id": req.body.productId },
+        { $inc: { "cart.$.quantity": 1 } },
+        { new: true }
+      );
+
+      return res.status(201).send(user.cart);
+    } else {
+      const user = await User.findOneAndUpdate(
+        { _id: req.user._id },
+        {
+          $push: {
+            cart: {
+              id: req.body.productId,
+              quantity: 1,
+              date: Date.now(),
+            },
+          },
+        },
+        { new: true }
+      );
+      return res.status(201).send(user.cart);
+    }
   } catch (error) {
     next(error);
   }
