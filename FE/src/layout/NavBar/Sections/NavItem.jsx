@@ -22,6 +22,7 @@ const routes = [
 
 const NavItem = ({ mobile }) => {
   const isAuth = useSelector((state) => state.user?.isAuth);
+  const cart = useSelector((state) => state.user?.userData?.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -69,7 +70,7 @@ const NavItem = ({ mobile }) => {
                 <Link to={to}>
                   {icon}
                   <span className="absolute top-0 inline-flex items-center justify-center w-4 h-4 text-xs text-white bg-black border-2 rounded-full -right-3">
-                    {1}
+                    {cart?.length}
                   </span>
                 </Link>
               </li>

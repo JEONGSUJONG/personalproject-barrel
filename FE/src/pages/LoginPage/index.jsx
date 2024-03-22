@@ -23,7 +23,6 @@ const LoginPage = () => {
     reset();
   };
 
-  
   const userEmail = {
     required: "이메일을 입력해주세요.",
   };
@@ -31,12 +30,12 @@ const LoginPage = () => {
     required: "비밀번호를 입력해주세요.",
     minLength: {
       value: 6,
-      message: "최소 6자입니다.",
+      message: "최소 6자를 입력해주세요.",
     },
   };
 
   return (
-    <section className="flex flex-col justify-center mt-10 m-auto" >
+    <section className="flex flex-col justify-center h-[100vh] m-auto">
       <div className="p-6 bg-white rounded-md shadow-md">
         <h1 className="text-3xl font-semibold text-center">로그인</h1>
         <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>

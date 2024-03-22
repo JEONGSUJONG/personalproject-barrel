@@ -96,9 +96,19 @@ ProductRouter.get("/", async (req, res, next) => {
 
 // GET Product from Id
 ProductRouter.get("/:id", async (req, res, next) => {
-  const productId = req.params.id;
+  const type = req.query.type;
+  let productIds = req.params.id;
+
+  if (type == "array") {
+    let ids = productIds.split(",");
+    productIds = ids.map((item) => {
+      return item;
+    });
+  }
   try {
-    const product = await Product.findById(productId).populate("writer");
+    const product = await Product.find({ _id: { $in: productIds } }).populate(
+      "writer"
+    );
     return res.status(200).send(product);
   } catch (error) {
     next(error);

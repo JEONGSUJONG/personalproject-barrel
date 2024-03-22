@@ -1,30 +1,32 @@
 import React from "react";
 
-const CheckBox = ({ continents, checkedContinents, onFilters }) => {
-  const handleToggle = (continentId) => {
+const CheckBox = ({ category, checkedCategory, onFilters }) => {
+  const handleToggle = (categoryId) => {
     // currentCheckBox가 이미 누른 Check인지 체크
-    const currentIndex = checkedContinents.indexOf(continentId);
-    const newChecked = [...checkedContinents]; // 불변성 유지
+    const currentIndex = checkedCategory.indexOf(categoryId);
+    const newChecked = [...checkedCategory]; // 불변성 유지
 
     if (currentIndex === -1) {
-      newChecked.push(continentId);
+      newChecked.push(categoryId);
     } else {
       newChecked.splice(currentIndex, 1);
     }
     onFilters(newChecked);
   };
   return (
-    <div className="h-[16vh] p-2 mb-3 border-2">
-      {continents?.map((continent) => (
-        <div key={continent._id}>
+    <div className="pl-14 my-8">
+      <p className="px-3 pt-3 font-bold text-xl">CATEGORY</p>
+      <hr className="w-10/12 my-4" />
+      {category?.map((category) => (
+        <div key={category._id}>
           <input
             type="checkbox"
-            onChange={() => handleToggle(continent._id)}
+            onChange={() => handleToggle(category._id)}
             checked={
-              checkedContinents.indexOf(continent._id) === -1 ? false : true
+              checkedCategory.indexOf(category._id) === -1 ? false : true
             }
           />{" "}
-          <label>{continent.name}</label>
+          <label>{category.name}</label>
         </div>
       ))}
     </div>
