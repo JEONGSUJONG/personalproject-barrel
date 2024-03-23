@@ -58,9 +58,6 @@ export const addToCart = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const response = await axiosInstance.post(`/users/cart`, body);
-<<<<<<< HEAD
-
-=======
       return response.data;
     } catch (error) {
       console.log(error);
@@ -118,7 +115,6 @@ export const payProducts = createAsyncThunk(
   async (body, thunkAPI) => {
     try {
       const response = await axiosInstance.post(`/users/payment`, body);
->>>>>>> 88431635c01c0ed4015e10dcfa334493ee0b1fdf
       return response.data;
     } catch (error) {
       console.log(error);

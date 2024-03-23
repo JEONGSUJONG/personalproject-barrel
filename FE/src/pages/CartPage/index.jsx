@@ -12,6 +12,7 @@ const CartPage = () => {
   const cartDetail = useSelector((state) => state.user?.cartDetail);
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
+
   useEffect(() => {
     let cartItemIds = [];
     if (userData?.cart && userData.cart.length > 0) {
@@ -32,8 +33,10 @@ const CartPage = () => {
 
   const totalPrice = (cartItems) => {
     let total = 0;
-    cartItems.map((item) => (total += item.price * item.quantity));
-    setTotal(total);
+    cartItems.forEach((item) => {
+      total += item.price * item.quantity;
+    });
+    setTotal(total.toLocaleString()); // 콤마 추가
   };
 
   const handleRemoveCartItem = (productId) => {

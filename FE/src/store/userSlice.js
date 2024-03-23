@@ -1,7 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-<<<<<<< HEAD
-import { registerUser, loginUser, authUser, logoutUser, addToCart } from "./thunkFunction";
-=======
 import {
   registerUser,
   loginUser,
@@ -12,7 +9,6 @@ import {
   removeCartItem,
   payProducts,
 } from "./thunkFunction";
->>>>>>> 88431635c01c0ed4015e10dcfa334493ee0b1fdf
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -97,11 +93,7 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-<<<<<<< HEAD
-      // Add to Cart
-=======
       // cart
->>>>>>> 88431635c01c0ed4015e10dcfa334493ee0b1fdf
       .addCase(addToCart.pending, (state) => {
         state.isLoading = true;
       })
@@ -113,8 +105,6 @@ const userSlice = createSlice({
       .addCase(addToCart.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-<<<<<<< HEAD
-=======
       })
 
       // cartItems
@@ -160,7 +150,6 @@ const userSlice = createSlice({
       .addCase(payProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
->>>>>>> 88431635c01c0ed4015e10dcfa334493ee0b1fdf
         toast.error(action.payload);
       });
   },
