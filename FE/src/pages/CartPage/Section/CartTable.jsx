@@ -1,6 +1,12 @@
 import React from "react";
+import { category } from "../../../utils/filterData";
 
 const CartTable = ({ products, onRemoveItem }) => {
+  const getCategoryName = (categoryId) => {
+    const foundCategory = category.find((c) => c._id === categoryId);
+    return foundCategory ? foundCategory.name : "";
+  };
+
   const renderItems =
     products.length > 0 &&
     products.map((item) => (
@@ -13,6 +19,7 @@ const CartTable = ({ products, onRemoveItem }) => {
           />
         </td>
         <td>{item.title}</td>
+        <td>{getCategoryName(item.category)}</td>
         <td>{item.quantity} 개</td>
         <td>{item.price} 원</td>
         <td>
@@ -27,6 +34,7 @@ const CartTable = ({ products, onRemoveItem }) => {
         <tr>
           <th>사진</th>
           <th>이름</th>
+          <th>카테고리</th>
           <th>개수</th>
           <th>가격</th>
           <th>삭제</th>

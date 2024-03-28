@@ -2,6 +2,7 @@ import SimpleImageSlider from "react-simple-image-slider";
 import LogoSlider from "../../../components/LogoSlider";
 
 const backgroundImg = [
+  { url: "/0.jpg" },
   { url: "/1.jpg" },
   { url: "/2.jpg" },
   { url: "/3.jpg" },

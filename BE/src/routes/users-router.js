@@ -6,8 +6,28 @@ const Payment = require("../models/payment-schema");
 const JWT = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const crypto = require("crypto");
-const async = require("async");
-const { error } = require("console");
+
+
+// GET /api/v1/users/auth - Auth by Token
+UserRouter.get("/auth", auth, async (req, res, next) => {
+  try {
+    const user = req.user;
+    return res.json({
+      id: user._id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      phone: user.phone,
+      image: user.image,
+      cart: user.cart,
+      like: user.like,
+      history: user.history,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 // GET /api/v1/users - 모든 사용자 정보 가져오기
 UserRouter.get("/", async (req, res, next) => {
@@ -20,9 +40,9 @@ UserRouter.get("/", async (req, res, next) => {
 });
 
 // GET /api/v1/users/:id - 특정 사용자 정보 가져오기
-UserRouter.get("/:id", async (req, res, next) => {
+UserRouter.get("/:userId", async (req, res, next) => {
   try {
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "사용자를 찾을 수 없습니다." });
@@ -56,7 +76,8 @@ UserRouter.post("/login", async (req, res, next) => {
   }
 });
 
-// Register
+// POST /api/v1/users/register - 회원가입
+// email, name, password
 UserRouter.post("/register", async (req, res, next) => {
   try {
     const user = new User(req.body);
@@ -67,20 +88,7 @@ UserRouter.post("/register", async (req, res, next) => {
   }
 });
 
-// Auth by Token
-UserRouter.get("/auth", auth, async (req, res, next) => {
-  return res.json({
-    id: req.user._id,
-    email: req.user.email,
-    name: req.user.name,
-    role: req.user.role,
-    image: req.user.image,
-    cart: req.user.cart,
-    history: req.user.history,
-  });
-});
-
-// Logout
+// POST /api/v1/users/logout - 로그아웃
 UserRouter.post("/logout", auth, async (req, res, next) => {
   try {
     return res.sendStatus(200);

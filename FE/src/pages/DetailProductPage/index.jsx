@@ -12,7 +12,7 @@ const DetailProductPage = () => {
     async function fetchProducts() {
       try {
         const response = await axiosInstance.get(
-          `/products/${productId}`
+          `/products/${productId}?type=single`
         );
         setProduct(response.data);
       } catch (error) {

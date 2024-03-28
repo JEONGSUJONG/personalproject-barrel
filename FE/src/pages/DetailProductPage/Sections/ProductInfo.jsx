@@ -27,7 +27,8 @@ const ProductInfo = ({ product }) => {
     <div className="p-6 ml-4 mb-14">
       <div className="text-3xl font-bold">{product[0].title}</div>
       <div className="mt-10 flex justify-between items-center">
-        <div className="uppercase">{product[0].color}</div>
+        <div className="uppercase">{product.color}</div>
+       <div className="uppercase">{product[0].color}</div>
         <LikeButton
           productId={product[0]._id}
           initialLiked={product[0].isLiked}
@@ -51,7 +52,6 @@ const ProductInfo = ({ product }) => {
           />
         </div>
       </div>
-
       <div className="my-12">
         <div className="mb-2 text-sm">SIZE</div>
         <div className="flex">

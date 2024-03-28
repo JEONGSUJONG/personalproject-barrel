@@ -17,6 +17,7 @@ import HistoryPage from "./pages/HistoryPage";
 import CartPage from "./pages/CartPage";
 import DetailProductPage from "./pages/DetailProductPage";
 import UploadProductPage from "./pages/UploadProductPage";
+import LikePage from "./pages/LikePage";
 
 function Layout() {
   return (
@@ -62,6 +63,7 @@ function App() {
           <Route path="/product/:productId" element={<DetailProductPage />} />
           <Route path="/user/cart" element={<CartPage />} />
           <Route path="/history" element={<HistoryPage />} />
+          <Route path="/like" element={<LikePage />} />
         </Route>
 
         {/* 로그인한 유저는 갈 수 없는 경로 */}

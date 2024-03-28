@@ -12,7 +12,7 @@
 
 ## 📅 프로젝트 기간
 
-2024.01.27(Sat) ~ ing (총 #주)
+2024.01.27(Sat) ~ ing (총 #주) **완성도 65%**
 
 ## 🌟 프로젝트 개요
 
@@ -35,6 +35,8 @@
 <details>
 <summary> - Users - </summary>
 
+<br>
+
 - 🔴 Login with Token of JWT / Register / Logout
 - 🔴 product cart CRUD
 - 🔴 payment / get payment history
@@ -47,21 +49,62 @@
 <details>
 <summary> - Product - </summary>
 
-- 🔴 payment / get payment history
-- 🟡 AuthUserMiddleware
-- 🔵 Email Authentication
+<br>
+
+- 🔴 Product Postman test (GET, POST)
+- 🔴 get product items
+- 🟡 likes
+    - 상품 클릭시 해당 상품으로 이동
+- 🔵 color and size
+- 🔵 Image to amazon S3
+- 🔵 해당 상품의 좋아요 갯수
+- 🔵 Product Update, Delete router
+    - POST, PUT, DELETE : Admin 권한 줘야함 (Navbar 업데이트)
+- 🔵 cart 제품 별 갯수 증가 및 감소
+
+</details>
+
+<details>
+<summary> - likes - </summary>
+
+<br>
+
+- 🔴 likes UI
+- 🔴 likes Postman test (PUT, GET)
+- 🟡 좋아요 상태 업데이트가 안됌.
+    - 상품을 삭제해도 해당 상품의 id는 유지되는 상태로 좋아요 db에 남아있음.
+        - 그로 인해서 좋아요 목록 조회에 에러가 발생함
+        - 또, 상품 총 likes 갯수에 문제가 있음
+- 🔵 likes toast 적용하기
+- 🔵 likes list 중 checkbox로 선택항목 장바구니로 이동시켜야함
+    - 좋아요 삭제도 포함시켜야함 -> state
+    - 상품 클릭시 해당 상품으로 이동
+- 🔵 likes.length에 따른 navbar 업데이트
+
+
+</details>
+
+<details>
+<summary> - Admin - </summary>
+
+<br>
+
+- 🔵 role 적용
 
 </details>
 
 ## 🔨 주요 기술
 
 **Programming Language**
+
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 
 **Frontend**
+
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white"> <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white"> <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponent-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> <img src="https://img.shields.io/badge/tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
 
 **Backend**
+
 <img src="https://img.shields.io/badge/gpt-412991?style=for-the-badge&logo=openai&logoColor=white"> <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=node.js&logoColor=white"> <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white"> <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white"> <img src="https://img.shields.io/badge/mongoose-F04D35?style=for-the-badge&logo=mongoose&logoColor=white"> <img src="https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white">
 
 **Backend - Node.js, Express.js**
