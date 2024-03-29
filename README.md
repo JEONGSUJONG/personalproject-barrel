@@ -22,23 +22,23 @@
 
 #### 메인 페이지
 
-![GOMCAM20240329_1359590449-ezgif com-video-to-gif-converter](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/3b40cad8-72e9-4cc1-8717-a88fb68322a3)
+<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/3b40cad8-72e9-4cc1-8717-a88fb68322a3" width="600" height="auto">
 
 #### 제품 업로드
 
-![캡처](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/c5ade2e0-bdd1-4e05-b8c7-035678be9fb3)
+<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/c5ade2e0-bdd1-4e05-b8c7-035678be9fb3" width="600" height="auto">
 
 #### 로그인
 
-![GOMCAM20240329_1401050913-ezgif com-video-to-gif-converter](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/d8c379fa-49ac-4449-885b-9f7d81a41198)
+<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/d8c379fa-49ac-4449-885b-9f7d81a41198" width="600" height="auto">
 
 #### 장바구니 및 결제
 
-![GOMCAM20240329_1407430905-ezgif com-video-to-gif-converter](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/6b2f0b8c-312d-448b-a9e7-ba53d8f114c1)
+<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/6b2f0b8c-312d-448b-a9e7-ba53d8f114c1" width="600" height="auto">
 
 #### 필터링 및 검색
 
-![GOMCAM20240329_1421130006-ezgif com-video-to-gif-converter](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/ad7bfd04-31be-49ab-87f9-15990da6e86d)
+<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/ad7bfd04-31be-49ab-87f9-15990da6e86d" width="600" height="auto">
 
 ## 🎴 Mildstone & Issues
 
