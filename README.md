@@ -20,7 +20,25 @@
 
 ## ✨ 프로젝트 핵심 기능
 
-####
+#### 메인 페이지
+
+![GOMCAM20240329_1359590449-ezgif com-video-to-gif-converter](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/3b40cad8-72e9-4cc1-8717-a88fb68322a3)
+
+#### 제품 업로드
+
+![캡처](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/c5ade2e0-bdd1-4e05-b8c7-035678be9fb3)
+
+#### 로그인
+
+![GOMCAM20240329_1401050913-ezgif com-video-to-gif-converter](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/d8c379fa-49ac-4449-885b-9f7d81a41198)
+
+#### 장바구니 및 결제
+
+![GOMCAM20240329_1407430905-ezgif com-video-to-gif-converter](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/6b2f0b8c-312d-448b-a9e7-ba53d8f114c1)
+
+#### 필터링 및 검색
+
+![GOMCAM20240329_1421130006-ezgif com-video-to-gif-converter](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/ad7bfd04-31be-49ab-87f9-15990da6e86d)
 
 ## 🎴 Mildstone & Issues
 
@@ -54,12 +72,12 @@
 - 🔴 Product Postman test (GET, POST)
 - 🔴 get product items
 - 🟡 likes
-    - 상품 클릭시 해당 상품으로 이동
+  - 상품 클릭시 해당 상품으로 이동
 - 🔵 color and size
 - 🔵 Image to amazon S3
 - 🔵 해당 상품의 좋아요 갯수
 - 🔵 Product Update, Delete router
-    - POST, PUT, DELETE : Admin 권한 줘야함 (Navbar 업데이트)
+  - POST, PUT, DELETE : Admin 권한 줘야함 (Navbar 업데이트)
 - 🔵 cart 제품 별 갯수 증가 및 감소
 
 </details>
@@ -72,15 +90,14 @@
 - 🔴 likes UI
 - 🔴 likes Postman test (PUT, GET)
 - 🟡 좋아요 상태 업데이트가 안됌.
-    - 상품을 삭제해도 해당 상품의 id는 유지되는 상태로 좋아요 db에 남아있음.
-        - 그로 인해서 좋아요 목록 조회에 에러가 발생함
-        - 또, 상품 총 likes 갯수에 문제가 있음
+  - 상품을 삭제해도 해당 상품의 id는 유지되는 상태로 좋아요 db에 남아있음.
+    - 그로 인해서 좋아요 목록 조회에 에러가 발생함
+    - 또, 상품 총 likes 갯수에 문제가 있음
 - 🔵 likes toast 적용하기
 - 🔵 likes list 중 checkbox로 선택항목 장바구니로 이동시켜야함
-    - 좋아요 삭제도 포함시켜야함 -> state
-    - 상품 클릭시 해당 상품으로 이동
+  - 좋아요 삭제도 포함시켜야함 -> state
+  - 상품 클릭시 해당 상품으로 이동
 - 🔵 likes.length에 따른 navbar 업데이트
-
 
 </details>
 
