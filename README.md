@@ -1,6 +1,6 @@
 # 🏊 배럴 : BARREL
 
-![image](https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/aaafbf44-4ec9-471a-a0f7-92e73894ed72)
+![image](https://github.com/JEONGSUJONG/JEONGSUJONG/assets/168960634/db7d1660-dc57-4cc8-be92-460c4b29ea16)
 
 클론 코딩 : **배럴 : BARREL** https://www.getbarrel.com/
 
@@ -12,7 +12,7 @@
 
 ## 📅 프로젝트 기간
 
-2024.01.27(Sat) ~ ing (총 #주) **완성도 65%**
+2024.02 ~ 2024.04
 
 ## 🌟 프로젝트 개요
 
@@ -22,93 +22,24 @@
 
 #### 메인 페이지
 
-<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/3b40cad8-72e9-4cc1-8717-a88fb68322a3" width="600" height="auto">
+<img src="https://github.com/JEONGSUJONG/JEONGSUJONG/assets/168960634/62bc4d16-6f5a-4975-9d34-1ffcedf4a4d7" width="600" height="auto">
+<img src="https://github.com/JEONGSUJONG/JEONGSUJONG/assets/168960634/90aa2072-35a6-4270-aa14-5c71bb3ace87" width="600" height="auto">
 
 #### 제품 업로드
 
-<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/c5ade2e0-bdd1-4e05-b8c7-035678be9fb3" width="600" height="auto">
+<img src="https://github.com/JEONGSUJONG/JEONGSUJONG/assets/168960634/af8da443-64c1-484e-acb5-2e9308b4fdc4" width="600" height="auto">
 
-#### 로그인
+#### 제품 상세
 
-<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/d8c379fa-49ac-4449-885b-9f7d81a41198" width="600" height="auto">
+<img src="https://github.com/JEONGSUJONG/JEONGSUJONG/assets/168960634/e23f5e2a-d32e-4a35-aae5-6f985052db4b" width="600" height="auto">
 
 #### 장바구니 및 결제
 
-<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/6b2f0b8c-312d-448b-a9e7-ba53d8f114c1" width="600" height="auto">
+<img src="https://github.com/JEONGSUJONG/JEONGSUJONG/assets/168960634/8ba3ed7a-b847-4999-9110-f00c1087369e" width="600" height="auto">
 
 #### 필터링 및 검색
 
-<img src="https://github.com/JEONGSUJONG/github-mainpage/assets/142254876/ad7bfd04-31be-49ab-87f9-15990da6e86d" width="600" height="auto">
-
-## 🎴 Mildstone & Issues
-
-**BACKEND**
-
-| 색상 | 중요도  |
-| ---- | ------- |
-| 🔴   | 완료    |
-| 🟡   | 진행 중 |
-| 🔵   | 진행 전 |
-
-<details>
-<summary> - Users - </summary>
-
-<br>
-
-- 🔴 Login with Token of JWT / Register / Logout
-- 🔴 product cart CRUD
-- 🔴 payment / get payment history
-- 🟡 AuthUserMiddleware of admin
-- 🔵 Email Authentication
-- 🔵 kakao Login/Register
-
-</details>
-
-<details>
-<summary> - Product - </summary>
-
-<br>
-
-- 🔴 Product Postman test (GET, POST)
-- 🔴 get product items
-- 🟡 likes
-  - 상품 클릭시 해당 상품으로 이동
-- 🔵 color and size
-- 🔵 Image to amazon S3
-- 🔵 해당 상품의 좋아요 갯수
-- 🔵 Product Update, Delete router
-  - POST, PUT, DELETE : Admin 권한 줘야함 (Navbar 업데이트)
-- 🔵 cart 제품 별 갯수 증가 및 감소
-
-</details>
-
-<details>
-<summary> - likes - </summary>
-
-<br>
-
-- 🔴 likes UI
-- 🔴 likes Postman test (PUT, GET)
-- 🟡 좋아요 상태 업데이트가 안됌.
-  - 상품을 삭제해도 해당 상품의 id는 유지되는 상태로 좋아요 db에 남아있음.
-    - 그로 인해서 좋아요 목록 조회에 에러가 발생함
-    - 또, 상품 총 likes 갯수에 문제가 있음
-- 🔵 likes toast 적용하기
-- 🔵 likes list 중 checkbox로 선택항목 장바구니로 이동시켜야함
-  - 좋아요 삭제도 포함시켜야함 -> state
-  - 상품 클릭시 해당 상품으로 이동
-- 🔵 likes.length에 따른 navbar 업데이트
-
-</details>
-
-<details>
-<summary> - Admin - </summary>
-
-<br>
-
-- 🔵 role 적용
-
-</details>
+<img src="https://github.com/JEONGSUJONG/JEONGSUJONG/assets/168960634/c097e763-6340-4caa-a654-148e23529ce6" width="600" height="auto">
 
 ## 🔨 주요 기술
 
@@ -132,25 +63,7 @@
 
 - MongoDB를 사용하여 유연한 데이터 스토리지와 관리 기능 제공.
 
-## 💄 디자인 시안
-
-[FIGMA]
-
-## 🔒 ERD
-
-## 📄 아키텍처 구성도
-
-## 📄 컴포넌트 명세서
-
-## 📄 API 명세서
-
 ## ⚙️ 프로젝트 파일 구조
-
-**Front-end**
-
-```
-
-```
 
 **Back-end**
 
@@ -199,5 +112,3 @@ server
 ├─ jwt-token.js
 └─ pagination.js
 ```
-
-## 🗣 협업 환경
